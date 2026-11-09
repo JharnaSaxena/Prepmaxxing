@@ -1,0 +1,38 @@
+# Environment variables and secrets
+.env
+.env.*
+*.env
+*.env.*
+
+# Dependencies
+node_modules/
+.pnpm/
+.pnpm-store/
+
+# Next.js
+.next/
+out/
+
+# Vercel
+.vercel/
+.vercel-cli-cache/
+
+# Git credentials and private keys
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+id_rsa
+id_ed25519
+credentials.json
+secrets.json
+service-account*.json
+
+# Logs and local files
+*.log
+.DS_Store
+Thumbs.db
+
+.npmrc

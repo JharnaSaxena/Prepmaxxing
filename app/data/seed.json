@@ -1,0 +1,1145 @@
+{
+  "ROLES": {
+    "Machine Learning & AI": "machine_learning",
+    "Full Stack": "full_stack",
+    "SDE": "sde",
+    "Data Engineering": "data_engineering"
+  },
+  "DSA_QUESTIONS": [
+    {
+      "id": "dsa-two-sum",
+      "leetcode_url": "https://leetcode.com/problems/two-sum/",
+      "title": "Two Sum · LeetCode #1",
+      "difficulty": "easy",
+      "difficulty_rank": 1,
+      "hint": "Track values already seen so each number needs one lookup.",
+      "description": "Read space-separated integers and a target on the next line. Print the two indices whose values add to target.",
+      "test_cases": [
+        {
+          "input": "2 7 11 15\n9\n",
+          "expected_output": "0 1\n"
+        },
+        {
+          "input": "3 2 4\n6\n",
+          "expected_output": "1 2\n"
+        },
+        {
+          "input": "2 7 11 15\n9\n",
+          "expected_output": "0 1\n",
+          "hidden": true
+        },
+        {
+          "input": "3 2 4\n6\n",
+          "expected_output": "1 2\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "nums=list(map(int,input().split()))\ntarget=int(input())\nseen={}\nfor i,n in enumerate(nums):\n    if target-n in seen:\n        print(seen[target-n],i)\n        break\n    seen[n]=i"
+    },
+    {
+      "id": "dsa-valid-parentheses",
+      "leetcode_url": "https://leetcode.com/problems/valid-parentheses/",
+      "title": "Valid Parentheses · LeetCode #20",
+      "difficulty": "easy",
+      "difficulty_rank": 1,
+      "hint": "A stack can remember the opening bracket that each closing bracket must match.",
+      "description": "Read a string of brackets. Print True if the brackets are balanced and correctly nested; otherwise print False.",
+      "test_cases": [
+        {
+          "input": "()[]{}\n",
+          "expected_output": "True\n"
+        },
+        {
+          "input": "([)]\n",
+          "expected_output": "False\n"
+        },
+        {
+          "input": "()[]{}\n",
+          "expected_output": "True\n",
+          "hidden": true
+        },
+        {
+          "input": "([)]\n",
+          "expected_output": "False\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "s=input().strip(); stack=[]; pairs={')':'(',']':'[','}':'{'}\nfor ch in s:\n    if ch in '([{': stack.append(ch)\n    elif not stack or stack.pop()!=pairs[ch]: print(False); break\nelse: print(not stack)"
+    },
+    {
+      "id": "dsa-max-subarray",
+      "leetcode_url": "https://leetcode.com/problems/maximum-subarray/",
+      "title": "Maximum Subarray · LeetCode #53",
+      "difficulty": "medium",
+      "difficulty_rank": 2,
+      "hint": "At each value, compare starting a new subarray with extending the previous one.",
+      "description": "Read a line of integers. Print the largest sum of any contiguous non-empty subarray.",
+      "test_cases": [
+        {
+          "input": "-2 1 -3 4 -1 2 1 -5 4\n",
+          "expected_output": "6\n"
+        },
+        {
+          "input": "-3 -2 -5\n",
+          "expected_output": "-2\n"
+        },
+        {
+          "input": "-2 1 -3 4 -1 2 1 -5 4\n",
+          "expected_output": "6\n",
+          "hidden": true
+        },
+        {
+          "input": "-3 -2 -5\n",
+          "expected_output": "-2\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "a=list(map(int,input().split()))\ncurrent=best=a[0]\nfor value in a[1:]:\n    current=max(value,current+value)\n    best=max(best,current)\nprint(best)"
+    },
+    {
+      "id": "dsa-product-array",
+      "leetcode_url": "https://leetcode.com/problems/product-of-array-except-self/",
+      "title": "Product of Array Except Self · LeetCode #238",
+      "difficulty": "medium",
+      "difficulty_rank": 2,
+      "hint": "Build prefix products in one pass and combine with suffix products in another.",
+      "description": "Read integers on one line. Print the product of all values except the value at each index. Do not use division.",
+      "test_cases": [
+        {
+          "input": "1 2 3 4\n",
+          "expected_output": "24 12 8 6\n"
+        },
+        {
+          "input": "-1 1 0 -3 3\n",
+          "expected_output": "0 0 9 0 0\n"
+        },
+        {
+          "input": "1 2 3 4\n",
+          "expected_output": "24 12 8 6\n",
+          "hidden": true
+        },
+        {
+          "input": "-1 1 0 -3 3\n",
+          "expected_output": "0 0 9 0 0\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "a=list(map(int,input().split())); out=[1]*len(a)\nprefix=1\nfor i,x in enumerate(a): out[i]=prefix; prefix*=x\nsuffix=1\nfor i in range(len(a)-1,-1,-1): out[i]*=suffix; suffix*=a[i]\nprint(*out)"
+    },
+    {
+      "id": "dsa-longest-substring",
+      "leetcode_url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+      "title": "Longest Substring Without Repeating Characters · LeetCode #3",
+      "difficulty": "medium",
+      "difficulty_rank": 2,
+      "hint": "Maintain a sliding window and the most recent index for each character.",
+      "description": "Read a string. Print the length of its longest substring with no repeated characters.",
+      "test_cases": [
+        {
+          "input": "abcabcbb\n",
+          "expected_output": "3\n"
+        },
+        {
+          "input": "bbbbb\n",
+          "expected_output": "1\n"
+        },
+        {
+          "input": "abcabcbb\n",
+          "expected_output": "3\n",
+          "hidden": true
+        },
+        {
+          "input": "bbbbb\n",
+          "expected_output": "1\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "s=input().rstrip('\\n'); last={}; start=0; best=0\nfor i,ch in enumerate(s):\n    if ch in last and last[ch]>=start: start=last[ch]+1\n    last[ch]=i; best=max(best,i-start+1)\nprint(best)"
+    },
+    {
+      "id": "dsa-top-k",
+      "leetcode_url": "https://leetcode.com/problems/top-k-frequent-elements/",
+      "title": "Top K Frequent Elements · LeetCode #347",
+      "difficulty": "hard",
+      "difficulty_rank": 3,
+      "hint": "Count frequencies first, then order by frequency; define how ties are handled.",
+      "description": "Read integers on one line and k on the next. Print the k most frequent values, highest frequency first; break ties by ascending value.",
+      "test_cases": [
+        {
+          "input": "1 1 1 2 2 3\n2\n",
+          "expected_output": "1 2\n"
+        },
+        {
+          "input": "4 4 3 3 2\n2\n",
+          "expected_output": "3 4\n"
+        },
+        {
+          "input": "1 1 1 2 2 3\n2\n",
+          "expected_output": "1 2\n",
+          "hidden": true
+        },
+        {
+          "input": "4 4 3 3 2\n2\n",
+          "expected_output": "3 4\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "from collections import Counter\na=list(map(int,input().split())); k=int(input())\nprint(*[v for v,_ in sorted(Counter(a).items(),key=lambda x:(-x[1],x[0]))[:k]])"
+    },
+    {
+      "id": "dsa-binary-search",
+      "title": "Binary Search · LeetCode #704",
+      "description": "Read a sorted list of integers on line one and a target on line two. Print its index, or -1.",
+      "hint": "Keep a search interval and discard half on each comparison.",
+      "difficulty": "easy",
+      "difficulty_rank": 1,
+      "leetcode_url": "https://leetcode.com/",
+      "test_cases": [
+        {
+          "input": "-1 0 3 5 9 12\n9\n",
+          "expected_output": "4\n"
+        },
+        {
+          "input": "1 3 5 7\n2\n",
+          "expected_output": "-1\n"
+        },
+        {
+          "input": "-1 0 3 5 9 12\n9\n",
+          "expected_output": "4\n",
+          "hidden": true
+        },
+        {
+          "input": "1 3 5 7\n2\n",
+          "expected_output": "-1\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "a=list(map(int,input().split())); t=int(input()); lo=0; hi=len(a)-1\nwhile lo<=hi:\n m=(lo+hi)//2\n if a[m]==t: print(m); break\n if a[m]<t: lo=m+1\n else: hi=m-1\nelse: print(-1)"
+    },
+    {
+      "id": "dsa-valid-anagram",
+      "title": "Valid Anagram · LeetCode #242",
+      "description": "Read two strings, one per line. Print true if they contain the same characters with the same frequencies; otherwise false.",
+      "hint": "Compare character counts, not just lengths.",
+      "difficulty": "easy",
+      "difficulty_rank": 1,
+      "leetcode_url": "https://leetcode.com/",
+      "test_cases": [
+        {
+          "input": "anagram\nnagaram\n",
+          "expected_output": "true\n"
+        },
+        {
+          "input": "rat\ncar\n",
+          "expected_output": "false\n"
+        },
+        {
+          "input": "anagram\nnagaram\n",
+          "expected_output": "true\n",
+          "hidden": true
+        },
+        {
+          "input": "rat\ncar\n",
+          "expected_output": "false\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "from collections import Counter\na=input().strip(); b=input().strip(); print(str(Counter(a)==Counter(b)).lower())"
+    },
+    {
+      "id": "dsa-climbing-stairs",
+      "title": "Climbing Stairs · LeetCode #70",
+      "description": "Read n. Print the number of distinct ways to climb n steps taking 1 or 2 steps at a time.",
+      "hint": "Use the two previous Fibonacci-like counts.",
+      "difficulty": "easy",
+      "difficulty_rank": 2,
+      "leetcode_url": "https://leetcode.com/",
+      "test_cases": [
+        {
+          "input": "2\n",
+          "expected_output": "2\n"
+        },
+        {
+          "input": "5\n",
+          "expected_output": "8\n"
+        },
+        {
+          "input": "2\n",
+          "expected_output": "2\n",
+          "hidden": true
+        },
+        {
+          "input": "5\n",
+          "expected_output": "8\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "n=int(input()); a,b=1,1\nfor _ in range(n): a,b=b,a+b\nprint(a)"
+    },
+    {
+      "id": "dsa-majority-element",
+      "title": "Majority Element · LeetCode #169",
+      "description": "Read integers on one line. Print the element appearing more than n/2 times.",
+      "hint": "Boyer-Moore voting finds a candidate in constant extra space.",
+      "difficulty": "easy",
+      "difficulty_rank": 2,
+      "leetcode_url": "https://leetcode.com/",
+      "test_cases": [
+        {
+          "input": "3 2 3\n",
+          "expected_output": "3\n"
+        },
+        {
+          "input": "2 2 1 1 1 2 2\n",
+          "expected_output": "2\n"
+        },
+        {
+          "input": "3 2 3\n",
+          "expected_output": "3\n",
+          "hidden": true
+        },
+        {
+          "input": "2 2 1 1 1 2 2\n",
+          "expected_output": "2\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "a=list(map(int,input().split())); c=None; n=0\nfor x in a:\n if n==0: c=x\n n+=1 if x==c else -1\nprint(c)"
+    },
+    {
+      "id": "dsa-stock-profit",
+      "title": "Best Time to Buy and Sell Stock · LeetCode #121",
+      "description": "Read daily prices on one line. Print the maximum profit from one buy before one sell, or 0.",
+      "hint": "Track the lowest price seen and best difference so far.",
+      "difficulty": "easy",
+      "difficulty_rank": 2,
+      "leetcode_url": "https://leetcode.com/",
+      "test_cases": [
+        {
+          "input": "7 1 5 3 6 4\n",
+          "expected_output": "5\n"
+        },
+        {
+          "input": "7 6 4 3 1\n",
+          "expected_output": "0\n"
+        },
+        {
+          "input": "7 1 5 3 6 4\n",
+          "expected_output": "5\n",
+          "hidden": true
+        },
+        {
+          "input": "7 6 4 3 1\n",
+          "expected_output": "0\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "p=list(map(int,input().split())); low=10**30; best=0\nfor x in p: low=min(low,x); best=max(best,x-low)\nprint(best)"
+    },
+    {
+      "id": "dsa-contains-duplicate",
+      "title": "Contains Duplicate · LeetCode #217",
+      "description": "Read integers on one line. Print true if any value repeats; otherwise false.",
+      "hint": "A set can reveal repeats in one pass.",
+      "difficulty": "easy",
+      "difficulty_rank": 1,
+      "leetcode_url": "https://leetcode.com/",
+      "test_cases": [
+        {
+          "input": "1 2 3 1\n",
+          "expected_output": "true\n"
+        },
+        {
+          "input": "1 2 3 4\n",
+          "expected_output": "false\n"
+        },
+        {
+          "input": "1 2 3 1\n",
+          "expected_output": "true\n",
+          "hidden": true
+        },
+        {
+          "input": "1 2 3 4\n",
+          "expected_output": "false\n",
+          "hidden": true
+        }
+      ],
+      "reference_solution": "a=list(map(int,input().split())); print(str(len(a)!=len(set(a))).lower())"
+    }
+  ],
+  "DOMAIN_QUESTIONS": {
+    "machine_learning": [
+      {
+        "id": "ml-confusion",
+        "title": "Binary Classification Metrics",
+        "description": "Read true labels on line one and predicted labels on line two. Print precision and recall to 3 decimals. Treat label 1 as positive; if a denominator is zero, print 0.000.",
+        "test_cases": [
+          {
+            "input": "1 0 1 1\n1 0 0 1\n",
+            "expected_output": "1.000 0.667\n"
+          },
+          {
+            "input": "1 0 1 1\n1 0 0 1\n",
+            "expected_output": "1.000 0.667\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "y=list(map(int,input().split())); p=list(map(int,input().split()))\ntp=sum(a==1 and b==1 for a,b in zip(y,p))\nfp=sum(a==0 and b==1 for a,b in zip(y,p))\nfn=sum(a==1 and b==0 for a,b in zip(y,p))\nprecision=tp/(tp+fp) if tp+fp else 0\nrecall=tp/(tp+fn) if tp+fn else 0\nprint(f'{precision:.3f} {recall:.3f}')"
+      },
+      {
+        "id": "ml-standardize",
+        "title": "Feature Standardization",
+        "description": "Read numeric features on one line. Print z-scores using population standard deviation, each rounded to 3 decimals. If all values are equal, print zeros.",
+        "test_cases": [
+          {
+            "input": "1 2 3\n",
+            "expected_output": "-1.225 0.000 1.225\n"
+          },
+          {
+            "input": "1 2 3\n",
+            "expected_output": "-1.225 0.000 1.225\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "import math\nx=list(map(float,input().split())); mean=sum(x)/len(x)\nstd=math.sqrt(sum((v-mean)**2 for v in x)/len(x))\nprint(*(f'{(v-mean)/std:.3f}' if std else '0.000' for v in x))"
+      },
+      {
+        "id": "ml-class-balance",
+        "title": "Class Balance",
+        "description": "Read binary labels on one line. Print the minority-to-majority ratio to 3 decimals; print 0.000 for empty input.",
+        "hint": "Count both classes and compare the smaller count with the larger.",
+        "difficulty": "easy",
+        "difficulty_rank": 1,
+        "leetcode_url": "https://leetcode.com/",
+        "test_cases": [
+          {
+            "input": "1 0 1 1 0\n",
+            "expected_output": "0.667\n"
+          },
+          {
+            "input": "1 1 1\n",
+            "expected_output": "0.000\n"
+          },
+          {
+            "input": "1 0 1 1 0\n",
+            "expected_output": "0.667\n",
+            "hidden": true
+          },
+          {
+            "input": "1 1 1\n",
+            "expected_output": "0.000\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "a=input().split(); c=a.count('1'); d=len(a)-c; print(f'{min(c,d)/max(c,d):.3f}' if max(c,d) else '0.000')"
+      }
+    ],
+    "full_stack": [
+      {
+        "id": "fs-query",
+        "title": "Normalize Query Parameters",
+        "description": "Read a URL query string (without '?'). Parse key=value pairs, sort by key, and print each decoded key and value on its own line as key=value. Assume keys and values contain no percent escapes.",
+        "test_cases": [
+          {
+            "input": "z=9&a=hello\n",
+            "expected_output": "a=hello\nz=9\n"
+          },
+          {
+            "input": "z=9&a=hello\n",
+            "expected_output": "a=hello\nz=9\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "from urllib.parse import parse_qsl\nfor k,v in sorted(parse_qsl(input(),keep_blank_values=True)):\n print(f'{k}={v}')"
+      },
+      {
+        "id": "fs-path",
+        "title": "Normalize Route Paths",
+        "description": "Read one URL path. Collapse repeated slashes and remove a trailing slash unless the path is root. Print the normalized path.",
+        "test_cases": [
+          {
+            "input": "/api//users/\n",
+            "expected_output": "/api/users\n"
+          },
+          {
+            "input": "/\n",
+            "expected_output": "/\n"
+          },
+          {
+            "input": "/api//users/\n",
+            "expected_output": "/api/users\n",
+            "hidden": true
+          },
+          {
+            "input": "/\n",
+            "expected_output": "/\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "path=input().strip()\nparts=[p for p in path.split('/') if p]\nresult='/'+ '/'.join(parts)\nprint(result if result=='/' else result.rstrip('/'))"
+      },
+      {
+        "id": "web-query-params",
+        "title": "Query Parameter Normalizer",
+        "description": "Read a query string (without ?). Print sorted key=value pairs, omitting empty values.",
+        "hint": "Parse repeated keys and normalize ordering.",
+        "difficulty": "easy",
+        "difficulty_rank": 1,
+        "leetcode_url": "https://leetcode.com/",
+        "test_cases": [
+          {
+            "input": "b=2&a=1\n",
+            "expected_output": "a=1&b=2\n"
+          },
+          {
+            "input": "z=&a=3\n",
+            "expected_output": "a=3\n"
+          },
+          {
+            "input": "b=2&a=1\n",
+            "expected_output": "a=1&b=2\n",
+            "hidden": true
+          },
+          {
+            "input": "z=&a=3\n",
+            "expected_output": "a=3\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "from urllib.parse import parse_qsl, urlencode\ns=input().strip(); pairs=sorted((k,v) for k,v in parse_qsl(s,keep_blank_values=True) if v); print(urlencode(pairs))"
+      }
+    ],
+    "sde": [
+      {
+        "id": "sde-intervals",
+        "title": "Merge Intervals",
+        "description": "Read n, then n lines with start and end integers. Merge overlapping intervals and print each merged interval in ascending order.",
+        "test_cases": [
+          {
+            "input": "4\n1 3\n2 6\n8 10\n15 18\n",
+            "expected_output": "1 6\n8 10\n15 18\n"
+          },
+          {
+            "input": "4\n1 3\n2 6\n8 10\n15 18\n",
+            "expected_output": "1 6\n8 10\n15 18\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "n=int(input()); intervals=sorted(tuple(map(int,input().split())) for _ in range(n))\nmerged=[]\nfor start,end in intervals:\n if merged and start<=merged[-1][1]: merged[-1]=(merged[-1][0],max(merged[-1][1],end))\n else: merged.append((start,end))\nfor a,b in merged: print(a,b)"
+      },
+      {
+        "id": "sde-lru",
+        "title": "LRU Cache Operations",
+        "description": "Read capacity, operation count, then operations `put key value` or `get key`. Print each get result (-1 for a miss). Use a standard-library ordered mapping.",
+        "test_cases": [
+          {
+            "input": "2\n5\nput a 1\nput b 2\nget a\nput c 3\nget b\n",
+            "expected_output": "1\n-1\n"
+          },
+          {
+            "input": "2\n5\nput a 1\nput b 2\nget a\nput c 3\nget b\n",
+            "expected_output": "1\n-1\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "from collections import OrderedDict\ncap=int(input()); n=int(input()); cache=OrderedDict()\nfor _ in range(n):\n op,*args=input().split()\n if op=='put':\n  k,v=args; cache.pop(k,None); cache[k]=v\n  if len(cache)>cap: cache.popitem(last=False)\n else:\n  k=args[0]; value=cache.pop(k,None)\n  if value is None: print(-1)\n  else: cache[k]=value; print(value)"
+      },
+      {
+        "id": "sde-log-window",
+        "title": "Log Window Aggregation",
+        "description": "Read integers on line one and window size k on line two. Print each sliding-window maximum.",
+        "hint": "A deque keeps candidate maxima in decreasing order.",
+        "difficulty": "easy",
+        "difficulty_rank": 2,
+        "leetcode_url": "https://leetcode.com/",
+        "test_cases": [
+          {
+            "input": "1 3 -1 -3 5 3 6 7\n3\n",
+            "expected_output": "3 3 5 5 6 7\n"
+          },
+          {
+            "input": "1\n1\n",
+            "expected_output": "1\n"
+          },
+          {
+            "input": "1 3 -1 -3 5 3 6 7\n3\n",
+            "expected_output": "3 3 5 5 6 7\n",
+            "hidden": true
+          },
+          {
+            "input": "1\n1\n",
+            "expected_output": "1\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "from collections import deque\na=list(map(int,input().split())); k=int(input()); d=deque(); out=[]\nfor i,x in enumerate(a):\n while d and d[0]<=i-k: d.popleft()\n while d and a[d[-1]]<=x: d.pop()\n d.append(i)\n if i>=k-1: out.append(str(a[d[0]]))\nprint(' '.join(out))"
+      }
+    ],
+    "data_engineering": [
+      {
+        "id": "de-daily",
+        "title": "Daily Event Aggregation",
+        "description": "Read row count, then date and event ID per line. Count events per date and print dates ascending as `date count`.",
+        "test_cases": [
+          {
+            "input": "4\n2026-01-02 a\n2026-01-01 b\n2026-01-02 c\n2026-01-01 d\n",
+            "expected_output": "2026-01-01 2\n2026-01-02 2\n"
+          },
+          {
+            "input": "4\n2026-01-02 a\n2026-01-01 b\n2026-01-02 c\n2026-01-01 d\n",
+            "expected_output": "2026-01-01 2\n2026-01-02 2\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "from collections import Counter\nn=int(input()); counts=Counter()\nfor _ in range(n):\n date,_event=input().split(); counts[date]+=1\nfor date in sorted(counts): print(date,counts[date])"
+      },
+      {
+        "id": "de-latest",
+        "title": "Keep the Latest Record",
+        "description": "Read row count, then `key timestamp value`. Keep the value with the greatest timestamp per key and print sorted keys as `key value`.",
+        "test_cases": [
+          {
+            "input": "4\na 1 old\nb 2 bee\na 3 new\nb 1 stale\n",
+            "expected_output": "a new\nb bee\n"
+          },
+          {
+            "input": "4\na 1 old\nb 2 bee\na 3 new\nb 1 stale\n",
+            "expected_output": "a new\nb bee\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "n=int(input()); latest={}\nfor _ in range(n):\n key,t,value=input().split(); t=int(t)\n if key not in latest or t>latest[key][0]: latest[key]=(t,value)\nfor key in sorted(latest): print(key,latest[key][1])"
+      },
+      {
+        "id": "de-dedupe-events",
+        "title": "Deduplicate Events",
+        "description": "Read newline-delimited JSON objects. Keep the first event for each id and print compact JSON lines in original order.",
+        "hint": "Track seen identifiers while preserving input order.",
+        "difficulty": "easy",
+        "difficulty_rank": 1,
+        "leetcode_url": "https://leetcode.com/",
+        "test_cases": [
+          {
+            "input": "{\"id\":1,\"v\":\"a\"}\n{\"id\":1,\"v\":\"b\"}\n{\"id\":2,\"v\":\"c\"}\n",
+            "expected_output": "{\"id\":1,\"v\":\"a\"}\n{\"id\":2,\"v\":\"c\"}\n"
+          },
+          {
+            "input": "{\"id\":\"x\"}\n{\"id\":\"y\"}\n",
+            "expected_output": "{\"id\":\"x\"}\n{\"id\":\"y\"}\n"
+          },
+          {
+            "input": "{\"id\":1,\"v\":\"a\"}\n{\"id\":1,\"v\":\"b\"}\n{\"id\":2,\"v\":\"c\"}\n",
+            "expected_output": "{\"id\":1,\"v\":\"a\"}\n{\"id\":2,\"v\":\"c\"}\n",
+            "hidden": true
+          },
+          {
+            "input": "{\"id\":\"x\"}\n{\"id\":\"y\"}\n",
+            "expected_output": "{\"id\":\"x\"}\n{\"id\":\"y\"}\n",
+            "hidden": true
+          }
+        ],
+        "reference_solution": "import sys,json\nseen=set()\nfor line in sys.stdin:\n x=json.loads(line)\n if x['id'] not in seen: seen.add(x['id']); print(json.dumps(x,separators=(',',':')))\n"
+      }
+    ]
+  },
+  "SYSTEM_DESIGN": {
+    "title": "Design a URL shortener",
+    "prompt": "Design a production URL-shortening service. Clarify functional and non-functional requirements, estimate scale, define APIs and data model, explain ID generation, redirects, caching, abuse controls, availability, analytics, and scaling trade-offs. State assumptions and failure modes."
+  },
+  "REPOSITORIES": {
+    "machine_learning": [
+      {
+        "repo": "karpathy/micrograd",
+        "url": "https://github.com/karpathy/micrograd",
+        "files": [
+          "micrograd/engine.py",
+          "README.md"
+        ]
+      },
+      {
+        "repo": "scikit-learn/scikit-learn",
+        "url": "https://github.com/scikit-learn/scikit-learn",
+        "files": [
+          "sklearn/utils/_chunking.py",
+          "sklearn/metrics/_classification.py"
+        ]
+      }
+    ],
+    "full_stack": [
+      {
+        "repo": "pallets/flask",
+        "url": "https://github.com/pallets/flask",
+        "files": [
+          "src/flask/app.py",
+          "src/flask/blueprints.py"
+        ]
+      },
+      {
+        "repo": "fastapi/fastapi",
+        "url": "https://github.com/fastapi/fastapi",
+        "files": [
+          "fastapi/routing.py",
+          "fastapi/dependencies/utils.py"
+        ]
+      }
+    ],
+    "sde": [
+      {
+        "repo": "TheAlgorithms/Python",
+        "url": "https://github.com/TheAlgorithms/Python",
+        "files": [
+          "data_structures/linked_list/singly_linked_list.py",
+          "sorts/heap_sort.py"
+        ]
+      },
+      {
+        "repo": "pydantic/pydantic",
+        "url": "https://github.com/pydantic/pydantic",
+        "files": [
+          "pydantic/main.py",
+          "pydantic/fields.py"
+        ]
+      }
+    ],
+    "data_engineering": [
+      {
+        "repo": "dbt-labs/dbt-core",
+        "url": "https://github.com/dbt-labs/dbt-core",
+        "files": [
+          "core/dbt/task/base.py",
+          "core/dbt/contracts/graph/nodes.py"
+        ]
+      },
+      {
+        "repo": "apache/spark",
+        "url": "https://github.com/apache/spark",
+        "files": [
+          "python/pyspark/sql/dataframe.py",
+          "python/pyspark/sql/group.py"
+        ]
+      }
+    ]
+  },
+  "JOB_CATALOGUE": [
+    {
+      "id": "mock-job-01",
+      "title": "ML Engineer I",
+      "track": "machine_learning",
+      "level": "entry",
+      "skills": [
+        "Python",
+        "scikit-learn",
+        "feature engineering",
+        "model evaluation"
+      ],
+      "jd_text": "ML Engineer I (entry) in machine learning. The role involves Python, scikit-learn, feature engineering, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, scikit-learn, feature engineering, model evaluation.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-02",
+      "title": "Applied AI Engineer",
+      "track": "machine_learning",
+      "level": "mid",
+      "skills": [
+        "Python",
+        "LLM APIs",
+        "RAG",
+        "evaluation"
+      ],
+      "jd_text": "Applied AI Engineer (mid) in machine learning. The role involves Python, LLM APIs, RAG, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, LLM APIs, RAG, evaluation.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-03",
+      "title": "Machine Learning Engineer",
+      "track": "machine_learning",
+      "level": "mid",
+      "skills": [
+        "Python",
+        "PyTorch",
+        "model serving",
+        "Docker"
+      ],
+      "jd_text": "Machine Learning Engineer (mid) in machine learning. The role involves Python, PyTorch, model serving, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, PyTorch, model serving, Docker.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-04",
+      "title": "NLP Engineer",
+      "track": "machine_learning",
+      "level": "mid",
+      "skills": [
+        "Python",
+        "NLP",
+        "transformers",
+        "evaluation"
+      ],
+      "jd_text": "NLP Engineer (mid) in machine learning. The role involves Python, NLP, transformers, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, NLP, transformers, evaluation.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-05",
+      "title": "Computer Vision Engineer",
+      "track": "machine_learning",
+      "level": "entry",
+      "skills": [
+        "Python",
+        "OpenCV",
+        "PyTorch",
+        "data pipelines"
+      ],
+      "jd_text": "Computer Vision Engineer (entry) in machine learning. The role involves Python, OpenCV, PyTorch, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, OpenCV, PyTorch, data pipelines.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-06",
+      "title": "MLOps Engineer",
+      "track": "machine_learning",
+      "level": "mid",
+      "skills": [
+        "Python",
+        "MLflow",
+        "Docker",
+        "CI/CD"
+      ],
+      "jd_text": "MLOps Engineer (mid) in machine learning. The role involves Python, MLflow, Docker, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, MLflow, Docker, CI/CD.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-07",
+      "title": "AI Research Associate",
+      "track": "machine_learning",
+      "level": "entry",
+      "skills": [
+        "Python",
+        "PyTorch",
+        "linear algebra",
+        "experimentation"
+      ],
+      "jd_text": "AI Research Associate (entry) in machine learning. The role involves Python, PyTorch, linear algebra, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, PyTorch, linear algebra, experimentation.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-08",
+      "title": "Recommendation Systems Engineer",
+      "track": "machine_learning",
+      "level": "mid",
+      "skills": [
+        "Python",
+        "ranking",
+        "SQL",
+        "model evaluation"
+      ],
+      "jd_text": "Recommendation Systems Engineer (mid) in machine learning. The role involves Python, ranking, SQL, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, ranking, SQL, model evaluation.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-09",
+      "title": "Full Stack Developer I",
+      "track": "full_stack",
+      "level": "entry",
+      "skills": [
+        "JavaScript",
+        "React",
+        "Node.js",
+        "REST APIs"
+      ],
+      "jd_text": "Full Stack Developer I (entry) in full stack. The role involves JavaScript, React, Node.js, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: JavaScript, React, Node.js, REST APIs.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-10",
+      "title": "React Developer",
+      "track": "full_stack",
+      "level": "entry",
+      "skills": [
+        "TypeScript",
+        "React",
+        "accessibility",
+        "testing"
+      ],
+      "jd_text": "React Developer (entry) in full stack. The role involves TypeScript, React, accessibility, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: TypeScript, React, accessibility, testing.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-11",
+      "title": "Product Engineer",
+      "track": "full_stack",
+      "level": "mid",
+      "skills": [
+        "TypeScript",
+        "React",
+        "PostgreSQL",
+        "API design"
+      ],
+      "jd_text": "Product Engineer (mid) in full stack. The role involves TypeScript, React, PostgreSQL, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: TypeScript, React, PostgreSQL, API design.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-12",
+      "title": "Frontend Engineer",
+      "track": "full_stack",
+      "level": "mid",
+      "skills": [
+        "JavaScript",
+        "React",
+        "performance",
+        "CSS"
+      ],
+      "jd_text": "Frontend Engineer (mid) in full stack. The role involves JavaScript, React, performance, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: JavaScript, React, performance, CSS.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-13",
+      "title": "Backend-focused Full Stack Engineer",
+      "track": "full_stack",
+      "level": "mid",
+      "skills": [
+        "Node.js",
+        "SQL",
+        "REST APIs",
+        "Docker"
+      ],
+      "jd_text": "Backend-focused Full Stack Engineer (mid) in full stack. The role involves Node.js, SQL, REST APIs, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Node.js, SQL, REST APIs, Docker.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-14",
+      "title": "Web Application Engineer",
+      "track": "full_stack",
+      "level": "entry",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Git"
+      ],
+      "jd_text": "Web Application Engineer (entry) in full stack. The role involves HTML, CSS, JavaScript, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: HTML, CSS, JavaScript, Git.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-15",
+      "title": "Full Stack Engineer",
+      "track": "full_stack",
+      "level": "senior",
+      "skills": [
+        "TypeScript",
+        "React",
+        "Node.js",
+        "system design"
+      ],
+      "jd_text": "Full Stack Engineer (senior) in full stack. The role involves TypeScript, React, Node.js, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: TypeScript, React, Node.js, system design.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-16",
+      "title": "UI Platform Engineer",
+      "track": "full_stack",
+      "level": "mid",
+      "skills": [
+        "TypeScript",
+        "React",
+        "design systems",
+        "testing"
+      ],
+      "jd_text": "UI Platform Engineer (mid) in full stack. The role involves TypeScript, React, design systems, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: TypeScript, React, design systems, testing.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-17",
+      "title": "Software Engineer I",
+      "track": "sde",
+      "level": "entry",
+      "skills": [
+        "Python",
+        "data structures",
+        "algorithms",
+        "testing"
+      ],
+      "jd_text": "Software Engineer I (entry) in sde. The role involves Python, data structures, algorithms, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, data structures, algorithms, testing.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-18",
+      "title": "Backend Software Engineer",
+      "track": "sde",
+      "level": "mid",
+      "skills": [
+        "Java",
+        "SQL",
+        "distributed systems",
+        "API design"
+      ],
+      "jd_text": "Backend Software Engineer (mid) in sde. The role involves Java, SQL, distributed systems, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Java, SQL, distributed systems, API design.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-19",
+      "title": "Platform Engineer",
+      "track": "sde",
+      "level": "mid",
+      "skills": [
+        "Go",
+        "Linux",
+        "Docker",
+        "observability"
+      ],
+      "jd_text": "Platform Engineer (mid) in sde. The role involves Go, Linux, Docker, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Go, Linux, Docker, observability.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-20",
+      "title": "Systems Software Engineer",
+      "track": "sde",
+      "level": "entry",
+      "skills": [
+        "C++",
+        "operating systems",
+        "debugging",
+        "algorithms"
+      ],
+      "jd_text": "Systems Software Engineer (entry) in sde. The role involves C++, operating systems, debugging, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: C++, operating systems, debugging, algorithms.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-21",
+      "title": "Reliability Engineer",
+      "track": "sde",
+      "level": "mid",
+      "skills": [
+        "Python",
+        "Linux",
+        "monitoring",
+        "incident response"
+      ],
+      "jd_text": "Reliability Engineer (mid) in sde. The role involves Python, Linux, monitoring, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, Linux, monitoring, incident response.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-22",
+      "title": "Application Engineer",
+      "track": "sde",
+      "level": "entry",
+      "skills": [
+        "Java",
+        "OOP",
+        "SQL",
+        "unit testing"
+      ],
+      "jd_text": "Application Engineer (entry) in sde. The role involves Java, OOP, SQL, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Java, OOP, SQL, unit testing.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-23",
+      "title": "Senior Software Engineer",
+      "track": "sde",
+      "level": "senior",
+      "skills": [
+        "system design",
+        "distributed systems",
+        "code review",
+        "mentoring"
+      ],
+      "jd_text": "Senior Software Engineer (senior) in sde. The role involves system design, distributed systems, code review, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: system design, distributed systems, code review, mentoring.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-24",
+      "title": "Data Engineer I",
+      "track": "data_engineering",
+      "level": "entry",
+      "skills": [
+        "Python",
+        "SQL",
+        "ETL",
+        "data quality"
+      ],
+      "jd_text": "Data Engineer I (entry) in data engineering. The role involves Python, SQL, ETL, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, SQL, ETL, data quality.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-25",
+      "title": "Analytics Engineer",
+      "track": "data_engineering",
+      "level": "mid",
+      "skills": [
+        "SQL",
+        "dbt",
+        "data modeling",
+        "testing"
+      ],
+      "jd_text": "Analytics Engineer (mid) in data engineering. The role involves SQL, dbt, data modeling, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: SQL, dbt, data modeling, testing.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-26",
+      "title": "Big Data Engineer",
+      "track": "data_engineering",
+      "level": "mid",
+      "skills": [
+        "Python",
+        "Spark",
+        "Kafka",
+        "cloud storage"
+      ],
+      "jd_text": "Big Data Engineer (mid) in data engineering. The role involves Python, Spark, Kafka, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, Spark, Kafka, cloud storage.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-27",
+      "title": "Data Platform Engineer",
+      "track": "data_engineering",
+      "level": "mid",
+      "skills": [
+        "Python",
+        "Airflow",
+        "Docker",
+        "observability"
+      ],
+      "jd_text": "Data Platform Engineer (mid) in data engineering. The role involves Python, Airflow, Docker, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Python, Airflow, Docker, observability.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-28",
+      "title": "Streaming Data Engineer",
+      "track": "data_engineering",
+      "level": "mid",
+      "skills": [
+        "Kafka",
+        "Python",
+        "SQL",
+        "stream processing"
+      ],
+      "jd_text": "Streaming Data Engineer (mid) in data engineering. The role involves Kafka, Python, SQL, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Kafka, Python, SQL, stream processing.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-29",
+      "title": "BI Data Engineer",
+      "track": "data_engineering",
+      "level": "entry",
+      "skills": [
+        "SQL",
+        "data visualization",
+        "ETL",
+        "communication"
+      ],
+      "jd_text": "BI Data Engineer (entry) in data engineering. The role involves SQL, data visualization, ETL, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: SQL, data visualization, ETL, communication.",
+      "is_synthetic": true
+    },
+    {
+      "id": "mock-job-30",
+      "title": "Senior Data Engineer",
+      "track": "data_engineering",
+      "level": "senior",
+      "skills": [
+        "Spark",
+        "data architecture",
+        "cloud",
+        "mentoring"
+      ],
+      "jd_text": "Senior Data Engineer (senior) in data engineering. The role involves Spark, data architecture, cloud, collaborating with engineering and product teams, writing maintainable and tested software, reviewing changes, and communicating technical decisions. Required skills: Spark, data architecture, cloud, mentoring.",
+      "is_synthetic": true
+    }
+  ]
+}

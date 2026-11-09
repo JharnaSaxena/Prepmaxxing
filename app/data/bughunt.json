@@ -1,0 +1,70 @@
+{
+  "machine_learning": {
+    "repo": "PrepMaxxing Lab · ML metrics mini-repo",
+    "url": "",
+    "title": "Precision regression in a metrics helper",
+    "prompt": "A unit test reports an incorrect precision value when a classifier has false negatives. Read the supplied helper, explain the bug with its inputs and outputs, then patch the code so all checks pass.",
+    "files": [{
+      "path": "src/metrics.py",
+      "content": "def precision(true_positive, false_positive, false_negative):\n    denominator = true_positive + false_negative  # planted bug: precision counts false positives\n    return true_positive / denominator if denominator else 0.0\n\nif __name__ == '__main__':\n    tp, fp, fn = map(int, input().split())\n    print(f'{precision(tp, fp, fn):.3f}')"
+    }],
+    "test_cases": [
+      { "input": "4 2 1\n", "expected_output": "0.667\n" },
+      { "input": "0 0 3\n", "expected_output": "0.000\n" },
+      { "input": "4 2 1\n", "expected_output": "0.667\n", "hidden": true },
+      { "input": "8 0 5\n", "expected_output": "1.000\n", "hidden": true }
+    ],
+    "reference_solution": "def precision(true_positive, false_positive, false_negative):\n    denominator = true_positive + false_positive\n    return true_positive / denominator if denominator else 0.0\n\nif __name__ == '__main__':\n    tp, fp, fn = map(int, input().split())\n    print(f'{precision(tp, fp, fn):.3f}')"
+  },
+  "full_stack": {
+    "repo": "PrepMaxxing Lab · web utilities mini-repo",
+    "url": "",
+    "title": "Slug helper preserves punctuation",
+    "prompt": "The route builder should create lowercase, hyphen-separated slugs and remove punctuation. Inspect the supplied helper, identify the faulty normalization step, and patch it so all checks pass.",
+    "files": [{
+      "path": "src/slug.py",
+      "content": "def slugify(text):\n    words = text.strip().lower().split()\n    return '-'.join(words)  # planted bug: punctuation is never removed\n\nif __name__ == '__main__':\n    print(slugify(input()))"
+    }],
+    "test_cases": [
+      { "input": "Hello, World!\n", "expected_output": "hello-world\n" },
+      { "input": "  Build   Tools  \n", "expected_output": "build-tools\n" },
+      { "input": "Hello, World!\n", "expected_output": "hello-world\n", "hidden": true },
+      { "input": "A/B: API v2.0\n", "expected_output": "a-b-api-v2-0\n", "hidden": true }
+    ],
+    "reference_solution": "import re\ndef slugify(text):\n    normalized = re.sub(r'[^a-z0-9]+', '-', text.lower())\n    return normalized.strip('-')\n\nif __name__ == '__main__':\n    print(slugify(input()))"
+  },
+  "sde": {
+    "repo": "PrepMaxxing Lab · search utilities mini-repo",
+    "url": "",
+    "title": "Binary search misses the final candidate",
+    "prompt": "A search can miss a target at the final index of the array. Read the supplied function, describe the boundary condition that causes it, then patch the code so all checks pass.",
+    "files": [{
+      "path": "src/search.py",
+      "content": "def binary_search(values, target):\n    left, right = 0, len(values) - 1\n    while left < right:  # planted bug: final one-element interval is never checked\n        middle = (left + right) // 2\n        if values[middle] == target:\n            return middle\n        if values[middle] < target:\n            left = middle + 1\n        else:\n            right = middle - 1\n    return -1\n\nif __name__ == '__main__':\n    values = list(map(int, input().split()))\n    target = int(input())\n    print(binary_search(values, target))"
+    }],
+    "test_cases": [
+      { "input": "1 3 5 7\n7\n", "expected_output": "3\n" },
+      { "input": "2 4 6 8\n2\n", "expected_output": "0\n" },
+      { "input": "1 3 5 7\n7\n", "expected_output": "3\n", "hidden": true },
+      { "input": "9\n9\n", "expected_output": "0\n", "hidden": true }
+    ],
+    "reference_solution": "def binary_search(values, target):\n    left, right = 0, len(values) - 1\n    while left <= right:\n        middle = (left + right) // 2\n        if values[middle] == target:\n            return middle\n        if values[middle] < target:\n            left = middle + 1\n        else:\n            right = middle - 1\n    return -1\n\nif __name__ == '__main__':\n    values = list(map(int, input().split()))\n    target = int(input())\n    print(binary_search(values, target))"
+  },
+  "data_engineering": {
+    "repo": "PrepMaxxing Lab · event pipeline mini-repo",
+    "url": "",
+    "title": "Event deduper drops the first occurrence",
+    "prompt": "The event pipeline should keep the first record for each id and discard only later duplicates. Inspect the supplied transform, identify why the wrong rows survive, then patch it so all checks pass.",
+    "files": [{
+      "path": "src/dedupe.py",
+      "content": "import json\nimport sys\n\ndef dedupe(rows):\n    seen, output = set(), []\n    for row in rows:\n        key = row['id']\n        if key not in seen:  # planted bug: first-seen events are discarded\n            seen.add(key)\n            continue\n        output.append(row)\n    return output\n\nif __name__ == '__main__':\n    rows = [json.loads(line) for line in sys.stdin if line.strip()]\n    for row in dedupe(rows):\n        print(json.dumps(row, separators=(',', ':')))"
+    }],
+    "test_cases": [
+      { "input": "{\"id\":1,\"v\":\"a\"}\n{\"id\":1,\"v\":\"b\"}\n{\"id\":2,\"v\":\"c\"}\n", "expected_output": "{\"id\":1,\"v\":\"a\"}\n{\"id\":2,\"v\":\"c\"}\n" },
+      { "input": "{\"id\":\"x\"}\n{\"id\":\"y\"}\n", "expected_output": "{\"id\":\"x\"}\n{\"id\":\"y\"}\n" },
+      { "input": "{\"id\":1,\"v\":\"a\"}\n{\"id\":1,\"v\":\"b\"}\n{\"id\":2,\"v\":\"c\"}\n", "expected_output": "{\"id\":1,\"v\":\"a\"}\n{\"id\":2,\"v\":\"c\"}\n", "hidden": true },
+      { "input": "{\"id\":\"same\",\"n\":1}\n{\"id\":\"same\",\"n\":2}\n", "expected_output": "{\"id\":\"same\",\"n\":1}\n", "hidden": true }
+    ],
+    "reference_solution": "import json\nimport sys\n\ndef dedupe(rows):\n    seen, output = set(), []\n    for row in rows:\n        key = row['id']\n        if key in seen:\n            continue\n        seen.add(key)\n        output.append(row)\n    return output\n\nif __name__ == '__main__':\n    rows = [json.loads(line) for line in sys.stdin if line.strip()]\n    for row in dedupe(rows):\n        print(json.dumps(row, separators=(',', ':')))"
+  }
+}
